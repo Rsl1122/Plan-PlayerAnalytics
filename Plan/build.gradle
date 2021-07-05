@@ -73,7 +73,7 @@ subprojects {
         spongeVersion = "7.3.0"
         nukkitVersion = "1.0-SNAPSHOT"
         bungeeVersion = "1.16-R0.4"
-        velocityVersion = "3.0.0-SNAPSHOT"
+        velocityVersion = "4.0.0-SNAPSHOT"
         redisBungeeVersion = "0.6.3"
 
         commonsTextVersion = "1.9"
