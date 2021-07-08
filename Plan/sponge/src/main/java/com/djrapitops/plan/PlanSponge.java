@@ -24,6 +24,7 @@ import com.djrapitops.plan.gathering.ServerShutdownSave;
 import com.djrapitops.plan.settings.locale.Locale;
 import com.djrapitops.plan.settings.locale.lang.PluginLang;
 import com.djrapitops.plan.settings.theme.PlanColorScheme;
+import io.github.slimjar.app.builder.ApplicationBuilder;
 import net.playeranalytics.plugin.PlatformAbstractionLayer;
 import net.playeranalytics.plugin.SpongePlatformLayer;
 import net.playeranalytics.plugin.scheduling.RunnableFactory;
@@ -44,7 +45,11 @@ import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.scheduler.Task;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -115,6 +120,17 @@ public class PlanSponge implements PlanPlugin {
         abstractionLayer = new SpongePlatformLayer(this, dataFolder, slf4jLogger);
         logger = abstractionLayer.getPluginLogger();
         runnableFactory = abstractionLayer.getRunnableFactory();
+
+        logger.info("Loading dependencies, this might take a while...");
+        try {
+            ApplicationBuilder.appending("Plan").downloadDirectoryPath(Paths.get(getDataFolder().getAbsolutePath()).resolve("libraries")).build();
+        } catch (IOException | ReflectiveOperationException | URISyntaxException | NoSuchAlgorithmException e) {
+            String version = abstractionLayer.getPluginInformation().getVersion();
+            java.util.logging.Logger.getGlobal().log(Level.SEVERE, e, () -> this.getClass().getSimpleName() + "-v" + version);
+            logger.error("Plan failed to load its dependencies correctly!");
+            logger.error("This error should be reported at https://github.com/plan-player-analytics/Plan/issues");
+            onDisable();
+        }
     }
 
     public void onEnable() {

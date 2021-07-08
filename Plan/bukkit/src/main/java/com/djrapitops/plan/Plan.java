@@ -25,6 +25,7 @@ import com.djrapitops.plan.gathering.ServerShutdownSave;
 import com.djrapitops.plan.settings.locale.Locale;
 import com.djrapitops.plan.settings.locale.lang.PluginLang;
 import com.djrapitops.plan.settings.theme.PlanColorScheme;
+import io.github.slimjar.app.builder.ApplicationBuilder;
 import net.playeranalytics.plugin.BukkitPlatformLayer;
 import net.playeranalytics.plugin.PlatformAbstractionLayer;
 import net.playeranalytics.plugin.scheduling.RunnableFactory;
@@ -34,6 +35,10 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -61,6 +66,17 @@ public class Plan extends JavaPlugin implements PlanPlugin {
         abstractionLayer = new BukkitPlatformLayer(this);
         pluginLogger = abstractionLayer.getPluginLogger();
         runnableFactory = abstractionLayer.getRunnableFactory();
+
+        getLogger().log(Level.INFO, "Loading dependencies, this might take a while...");
+        try {
+            ApplicationBuilder.appending("Plan").downloadDirectoryPath(Paths.get(getDataFolder().getAbsolutePath()).resolve("libraries")).build();
+        } catch (IOException | ReflectiveOperationException | URISyntaxException | NoSuchAlgorithmException e) {
+            String version = abstractionLayer.getPluginInformation().getVersion();
+            getLogger().log(Level.SEVERE, e, () -> this.getClass().getSimpleName() + "-v" + version);
+            getLogger().log(Level.SEVERE, "Plan failed to load its dependencies correctly!");
+            getLogger().log(Level.SEVERE, "This error should be reported at https://github.com/plan-player-analytics/Plan/issues");
+            onDisable();
+        }
     }
 
     @Override

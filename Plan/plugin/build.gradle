@@ -11,6 +11,14 @@ dependencies {
     testImplementation project(path: ":sponge", configuration: 'testArtifacts')
     testImplementation project(path: ":bungeecord", configuration: 'testArtifacts')
     testImplementation project(path: ":velocity", configuration: 'testArtifacts')
+
+    slim "mysql:mysql-connector-java:$mysqlVersion"
+    slim "org.xerial:sqlite-jdbc:$sqliteVersion"
+}
+
+slimJar {
+    relocate 'com.mysql', 'plan.com.mysql'
+    relocate 'com.google.protobuf', 'plan.com.mysql.cj.x.google.protobuf'
 }
 
 shadowJar {
@@ -18,7 +26,6 @@ shadowJar {
         exclude 'org/apache/logging/**'
     }
     relocate 'dagger', 'plan.dagger'
-    relocate 'com.mysql', 'plan.com.mysql'
     // Don't relocate SQLite since the org.sqlite.NativeDB class calls are not relocated properly
     // relocate 'org.sqlite', 'plan.org.sqlite'
     relocate 'javax.inject', 'plan.javax.inject'

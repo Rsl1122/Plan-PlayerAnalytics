@@ -6,8 +6,8 @@ dependencies {
     implementation "org.apache.commons:commons-text:$commonsTextVersion"
     implementation "org.apache.commons:commons-compress:$commonsCompressVersion"
     implementation "com.github.ben-manes.caffeine:caffeine:$caffeineVersion"
-    implementation "mysql:mysql-connector-java:$mysqlVersion"
-    implementation "org.xerial:sqlite-jdbc:$sqliteVersion"
+    compileOnly "mysql:mysql-connector-java:$mysqlVersion"
+    compileOnly "org.xerial:sqlite-jdbc:$sqliteVersion"
     implementation "com.zaxxer:HikariCP:$hikariVersion"
     implementation "org.slf4j:slf4j-nop:$slf4jVersion"
     implementation "org.slf4j:slf4j-api:$slf4jVersion"
@@ -50,8 +50,6 @@ shadowJar {
     // Exclude unnecessary SQLite drivers
     exclude '**/Linux/android-arm/libsqlitejdbc.so'
     exclude '**/DragonFlyBSD/**/libsqlitejdbc.so'
-
-    relocate 'com.google.protobuf', 'plan.com.mysql.cj.x.google.protobuf'
 
     relocate 'com.maxmind', 'plan.com.maxmind'
     relocate 'com.fasterxml', 'plan.com.fasterxml'
