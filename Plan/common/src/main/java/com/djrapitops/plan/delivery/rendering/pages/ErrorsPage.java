@@ -53,7 +53,8 @@ public class ErrorsPage implements Page {
         placeholders.put("title", Icon.called("bug").build().toHtml() + " Error logs");
         placeholders.put("titleText", "Error logs");
         placeholders.put("paragraph", buildBody());
-        placeholders.put("version", versionChecker.getUpdateButton().orElse(versionChecker.getCurrentVersionButton()));
+        placeholders.put("versionButton", versionChecker.getUpdateButton().orElse(versionChecker.getCurrentVersionButton()));
+        placeholders.put("version", versionChecker.getCurrentVersion());
         placeholders.put("updateModal", versionChecker.getUpdateModal());
         placeholders.put("contributors", Contributors.generateContributorHtml());
         return UnaryChain.of(template)

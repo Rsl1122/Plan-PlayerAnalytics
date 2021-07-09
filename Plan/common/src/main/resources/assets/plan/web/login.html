@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,7 +12,7 @@
     <title>Plan | Login</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fontawesome-free/css/all.min.css?v=${version}" rel="stylesheet" type="text/css">
     <link crossorigin="anonymous" href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900"
           rel="stylesheet">
 
@@ -20,8 +20,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
           integrity="sha256-hHKA3d/HttC8OW3Sl093W8DoZudhHJDj++kZYo6MLzA="
           crossorigin="anonymous">
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/sb-admin-2.css?v=${version}" rel="stylesheet">
+    <link href="css/style.css?v=${version}" rel="stylesheet">
 
 </head>
 
@@ -218,10 +218,10 @@
         crossorigin="anonymous"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="js/xmlhttprequests.js"></script>
-<script src="js/color-selector.js"></script>
+<script src="js/xmlhttprequests.js?v=${version}"></script>
+<script src="js/color-selector.js?v=${version}"></script>
 
-<script src="js/logonsine.js"></script>
+<script src="js/logonsine.js?v=${version}"></script>
 <script id="mainScript">
     drawSine("decoration");
     document.getElementById('login-button').addEventListener('click', event => {

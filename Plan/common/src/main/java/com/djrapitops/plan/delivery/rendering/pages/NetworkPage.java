@@ -98,8 +98,9 @@ public class NetworkPage implements Page {
         placeholders.put("minPingColor", theme.getValue(ThemeVal.GRAPH_MIN_PING));
         placeholders.put("avgPingColor", theme.getValue(ThemeVal.GRAPH_AVG_PING));
         placeholders.put("timeZone", config.getTimeZoneOffsetHours());
-
-        placeholders.put("version", versionChecker.getUpdateButton().orElse(versionChecker.getCurrentVersionButton()));
+        
+        placeholders.put("versionButton", versionChecker.getUpdateButton().orElse(versionChecker.getCurrentVersionButton()));
+        placeholders.put("version", versionChecker.getCurrentVersion());
         placeholders.put("updateModal", versionChecker.getUpdateModal());
         placeholders.put("contributors", Contributors.generateContributorHtml());
 

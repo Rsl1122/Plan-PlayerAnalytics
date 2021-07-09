@@ -52,7 +52,8 @@ public class InternalErrorPage implements Page {
         placeholders.put("title", Icon.called("bug") + " 500 Internal Error occurred");
         placeholders.put("titleText", "500 Internal Error occurred");
         placeholders.put("paragraph", createContent());
-        placeholders.put("version", versionChecker.getUpdateButton().orElse(versionChecker.getCurrentVersionButton()));
+        placeholders.put("versionButton", versionChecker.getUpdateButton().orElse(versionChecker.getCurrentVersionButton()));
+        placeholders.put("version", versionChecker.getCurrentVersion());
         placeholders.put("updateModal", versionChecker.getUpdateModal());
         placeholders.put("contributors", Contributors.generateContributorHtml());
         return placeholders.apply(template);

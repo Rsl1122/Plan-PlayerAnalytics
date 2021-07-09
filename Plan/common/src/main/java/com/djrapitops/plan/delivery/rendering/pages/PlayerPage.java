@@ -94,7 +94,8 @@ public class PlayerPage implements Page {
 
         placeholders.put("refresh", clockLongFormatter.apply(now));
         placeholders.put("refreshFull", secondLongFormatter.apply(now));
-        placeholders.put("version", versionChecker.getUpdateButton().orElse(versionChecker.getCurrentVersionButton()));
+        placeholders.put("versionButton", versionChecker.getUpdateButton().orElse(versionChecker.getCurrentVersionButton()));
+        placeholders.put("version", versionChecker.getCurrentVersion());
         placeholders.put("updateModal", versionChecker.getUpdateModal());
 
         String playerName = player.getValue(PlayerKeys.NAME).orElse(playerUUID.toString());

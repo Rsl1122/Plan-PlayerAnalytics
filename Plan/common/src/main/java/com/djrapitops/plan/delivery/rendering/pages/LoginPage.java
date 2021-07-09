@@ -22,6 +22,8 @@ import com.djrapitops.plan.settings.locale.Locale;
 import com.djrapitops.plan.settings.theme.Theme;
 import com.djrapitops.plan.utilities.java.UnaryChain;
 
+import com.djrapitops.plan.version.VersionChecker;
+
 /**
  * Html String generator for /login and /register page.
  *
@@ -34,22 +36,27 @@ public class LoginPage implements Page {
     private final Locale locale;
     private final Theme theme;
 
+    private final VersionChecker versionChecker;
+
     LoginPage(
             String htmlTemplate,
             ServerInfo serverInfo,
             Locale locale,
-            Theme theme
+            Theme theme,
+            VersionChecker versionChecker
     ) {
         this.template = htmlTemplate;
         this.serverInfo = serverInfo;
         this.locale = locale;
         this.theme = theme;
+        this.versionChecker = versionChecker;
     }
 
     @Override
     public String toHtml() {
         PlaceholderReplacer placeholders = new PlaceholderReplacer();
         placeholders.put("command", getCommand());
+        placeholders.put("version", versionChecker.getCurrentVersion());
         return UnaryChain.of(template)
                 .chain(theme::replaceThemeColors)
                 .chain(placeholders::apply)

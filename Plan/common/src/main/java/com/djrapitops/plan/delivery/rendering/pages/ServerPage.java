@@ -94,7 +94,8 @@ public class ServerPage implements Page {
         placeholders.put("gmPieColors", theme.getValue(ThemeVal.GRAPH_GM_PIE));
 
         placeholders.put("contributors", Contributors.generateContributorHtml());
-        placeholders.put("version", versionChecker.getUpdateButton().orElse(versionChecker.getCurrentVersionButton()));
+        placeholders.put("versionButton", versionChecker.getUpdateButton().orElse(versionChecker.getCurrentVersionButton()));
+        placeholders.put("version", versionChecker.getCurrentVersion());
         placeholders.put("updateModal", versionChecker.getUpdateModal());
 
         CachingSupplier<ServerPluginTabs> pluginTabs = new CachingSupplier<>(() -> {

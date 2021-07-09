@@ -62,7 +62,8 @@ public class PlayersPage implements Page {
         PlaceholderReplacer placeholders = new PlaceholderReplacer();
 
         placeholders.put("refreshBarrier", config.get(WebserverSettings.REDUCED_REFRESH_BARRIER));
-        placeholders.put("version", versionChecker.getUpdateButton().orElse(versionChecker.getCurrentVersionButton()));
+        placeholders.put("versionButton", versionChecker.getUpdateButton().orElse(versionChecker.getCurrentVersionButton()));
+        placeholders.put("version", versionChecker.getCurrentVersion());
         placeholders.put("updateModal", versionChecker.getUpdateModal());
         placeholders.put("contributors", Contributors.generateContributorHtml());
         if (serverInfo.getServer().isProxy()) {

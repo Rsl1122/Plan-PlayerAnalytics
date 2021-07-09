@@ -49,7 +49,8 @@ public class QueryPage implements Page {
     @Override
     public String toHtml() {
         PlaceholderReplacer placeholders = new PlaceholderReplacer();
-        placeholders.put("version", versionChecker.getUpdateButton().orElse(versionChecker.getCurrentVersionButton()));
+        placeholders.put("versionButton", versionChecker.getUpdateButton().orElse(versionChecker.getCurrentVersionButton()));
+        placeholders.put("version", versionChecker.getCurrentVersion());
         placeholders.put("updateModal", versionChecker.getUpdateModal());
         placeholders.put("contributors", Contributors.generateContributorHtml());
         return UnaryChain.of(template)

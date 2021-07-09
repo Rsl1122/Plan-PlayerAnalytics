@@ -83,6 +83,7 @@ public class Contributors {
             new Contributor("\u6d1b\u4f0a", LANG),
             new Contributor("portlek", CODE),
             new Contributor("mbax", CODE),
+            new Contributor("KairuByte", CODE),
             new Contributor("rymiel", CODE)
     };
 

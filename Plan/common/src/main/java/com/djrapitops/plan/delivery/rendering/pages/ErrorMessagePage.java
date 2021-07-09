@@ -67,7 +67,8 @@ public class ErrorMessagePage implements Page {
         placeholders.put("title", icon.toHtml() + " " + errorTitle);
         placeholders.put("titleText", errorTitle);
         placeholders.put("paragraph", errorMsg);
-        placeholders.put("version", versionChecker.getUpdateButton().orElse(versionChecker.getCurrentVersionButton()));
+        placeholders.put("versionButton", versionChecker.getUpdateButton().orElse(versionChecker.getCurrentVersionButton()));
+        placeholders.put("version", versionChecker.getCurrentVersion());
         placeholders.put("updateModal", versionChecker.getUpdateModal());
         placeholders.put("contributors", Contributors.generateContributorHtml());
         return UnaryChain.of(template)
