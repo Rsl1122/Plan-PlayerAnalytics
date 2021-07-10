@@ -78,7 +78,7 @@ subprojects {
 
         commonsTextVersion = "1.9"
         commonsCompressVersion = "1.20"
-        caffeineVersion = "2.9.2"
+        caffeineVersion = "3.0.3"
         mysqlVersion = "8.0.25"
         sqliteVersion = "3.36.0.1"
         hikariVersion = "4.0.3"
