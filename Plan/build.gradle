@@ -69,7 +69,7 @@ subprojects {
 
         bukkitVersion = "1.13.2-R0.1-SNAPSHOT"
         spigotVersion = "1.13.2-R0.1-SNAPSHOT"
-        paperVersion = "1.13.2-R0.1-SNAPSHOT"
+        paperVersion = "1.16.5-R0.1-SNAPSHOT"
         spongeVersion = "7.3.0"
         nukkitVersion = "1.0-SNAPSHOT"
         bungeeVersion = "1.16-R0.4"
