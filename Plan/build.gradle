@@ -71,7 +71,7 @@ subprojects {
         spigotVersion = "1.13.2-R0.1-SNAPSHOT"
         paperVersion = "1.13.2-R0.1-SNAPSHOT"
         spongeVersion = "7.3.0"
-        nukkitVersion = "1.0-SNAPSHOT"
+        nukkitVersion = "2.0.0-SNAPSHOT"
         bungeeVersion = "1.16-R0.4"
         velocityVersion = "3.0.0-SNAPSHOT"
         redisBungeeVersion = "0.6.3"
