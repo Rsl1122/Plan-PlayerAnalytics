@@ -17,15 +17,17 @@
 package com.djrapitops.plan.settings.locale.lang;
 
 public enum FilterLang implements Lang {
-    OPERATORS("Operators"),
-    NON_OPERATORS("Non operators"),
-    BANNED("Banned"),
-    NOT_BANNED("Not banned"),
+    OPERATORS("", "Operators"),
+    NON_OPERATORS("", "Non operators"),
+    BANNED("", "Banned"),
+    NOT_BANNED("", "Not banned"),
     ;
 
+    private final String key;
     private final String defaultValue;
 
-    FilterLang(String defaultValue) {
+    FilterLang(String key, String defaultValue) {
+        this.key = key;
         this.defaultValue = defaultValue;
     }
 
@@ -33,6 +35,9 @@ public enum FilterLang implements Lang {
     public String getIdentifier() {
         return "HTML - " + name() + " (Filters)";
     }
+
+    @Override
+    public String getKey() { return key; }
 
     @Override
     public String getDefault() {
