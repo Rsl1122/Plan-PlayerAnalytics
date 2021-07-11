@@ -22,17 +22,19 @@ package com.djrapitops.plan.settings.locale.lang;
  * @author AuroraLS3
  */
 public enum GenericLang implements Lang {
-    YES("Positive", "Yes"),
-    NO("Negative", "No"),
-    UNKNOWN("Unknown", "Unknown"),
-    UNAVAILABLE("Unavailable", "Unavailable"),
-    TODAY("Today", "'Today'"),
-    YESTERDAY("Yesterday", "'Yesterday'");
+    YES("", "Positive", "Yes"),
+    NO("", "Negative", "No"),
+    UNKNOWN("", "Unknown", "Unknown"),
+    UNAVAILABLE("", "Unavailable", "Unavailable"),
+    TODAY("", "Today", "'Today'"),
+    YESTERDAY("", "Yesterday", "'Yesterday'");
 
+    private final String key;
     private final String identifier;
     private final String defaultValue;
 
-    GenericLang(String identifier, String defaultValue) {
+    GenericLang(String key, String identifier, String defaultValue) {
+        this.key = key;
         this.identifier = identifier;
         this.defaultValue = defaultValue;
     }
@@ -41,6 +43,9 @@ public enum GenericLang implements Lang {
     public String getIdentifier() {
         return identifier;
     }
+
+    @Override
+    public String getKey() { return key; }
 
     @Override
     public String getDefault() {

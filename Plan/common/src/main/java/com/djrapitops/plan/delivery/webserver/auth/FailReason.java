@@ -25,18 +25,20 @@ import com.djrapitops.plan.settings.locale.lang.Lang;
  * @see com.djrapitops.plan.exceptions.WebUserAuthException
  */
 public enum FailReason implements Lang {
-    NO_USER_PRESENT("User cookie not present"),
-    EXPIRED_COOKIE("User cookie has expired"),
-    USER_AND_PASS_NOT_SPECIFIED("User and Password not specified"),
-    USER_DOES_NOT_EXIST("User does not exist"),
-    USER_INFORMATION_NOT_FOUND("Registration failed, try again (The code expires after 15 minutes)"),
-    USER_PASS_MISMATCH("User and Password did not match"),
-    DATABASE_NOT_OPEN("Database is not open, check db status with /plan info"),
-    ERROR("Authentication failed due to error");
+    NO_USER_PRESENT("", "User cookie not present"),
+    EXPIRED_COOKIE("", "User cookie has expired"),
+    USER_AND_PASS_NOT_SPECIFIED("", "User and Password not specified"),
+    USER_DOES_NOT_EXIST("", "User does not exist"),
+    USER_INFORMATION_NOT_FOUND("", "Registration failed, try again (The code expires after 15 minutes)"),
+    USER_PASS_MISMATCH("", "User and Password did not match"),
+    DATABASE_NOT_OPEN("", "Database is not open, check db status with /plan info"),
+    ERROR("", "Authentication failed due to error");
 
+    private final String key;
     private final String reason;
 
-    FailReason(String reason) {
+    FailReason(String key, String reason) {
+        this.key = key;
         this.reason = reason;
     }
 
@@ -48,6 +50,9 @@ public enum FailReason implements Lang {
     public String getIdentifier() {
         return "HTML - " + name();
     }
+
+    @Override
+    public String getKey() { return key; }
 
     @Override
     public String getDefault() {
