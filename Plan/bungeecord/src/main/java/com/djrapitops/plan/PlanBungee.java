@@ -23,13 +23,18 @@ import com.djrapitops.plan.exceptions.EnableException;
 import com.djrapitops.plan.settings.locale.Locale;
 import com.djrapitops.plan.settings.locale.lang.PluginLang;
 import com.djrapitops.plan.settings.theme.PlanColorScheme;
+import io.github.slimjar.app.builder.ApplicationBuilder;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.playeranalytics.plugin.BungeePlatformLayer;
 import net.playeranalytics.plugin.PlatformAbstractionLayer;
 import net.playeranalytics.plugin.scheduling.RunnableFactory;
 import net.playeranalytics.plugin.server.PluginLogger;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -52,6 +57,17 @@ public class PlanBungee extends Plugin implements PlanPlugin {
         abstractionLayer = new BungeePlatformLayer(this);
         logger = abstractionLayer.getPluginLogger();
         runnableFactory = abstractionLayer.getRunnableFactory();
+
+        getLogger().log(Level.INFO, "Loading dependencies, this might take a while...");
+        try {
+            ApplicationBuilder.appending("Plan").downloadDirectoryPath(Paths.get(getDataFolder().getAbsolutePath()).resolve("libraries")).build();
+        } catch (IOException | ReflectiveOperationException | URISyntaxException | NoSuchAlgorithmException e) {
+            String version = abstractionLayer.getPluginInformation().getVersion();
+            getLogger().log(Level.SEVERE, e, () -> this.getClass().getSimpleName() + "-v" + version);
+            getLogger().log(Level.SEVERE, "Plan failed to load its dependencies correctly!");
+            getLogger().log(Level.SEVERE, "This error should be reported at https://github.com/plan-player-analytics/Plan/issues");
+            onDisable();
+        }
     }
 
     @Override

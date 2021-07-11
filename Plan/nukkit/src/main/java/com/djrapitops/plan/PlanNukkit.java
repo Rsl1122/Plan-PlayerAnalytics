@@ -29,11 +29,16 @@ import com.djrapitops.plan.settings.locale.Locale;
 import com.djrapitops.plan.settings.locale.lang.PluginLang;
 import com.djrapitops.plan.settings.theme.PlanColorScheme;
 import com.djrapitops.plan.utilities.logging.ErrorContext;
+import io.github.slimjar.app.builder.ApplicationBuilder;
 import net.playeranalytics.plugin.NukkitPlatformLayer;
 import net.playeranalytics.plugin.PlatformAbstractionLayer;
 import net.playeranalytics.plugin.scheduling.RunnableFactory;
 import net.playeranalytics.plugin.server.PluginLogger;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,6 +71,17 @@ public class PlanNukkit extends PluginBase implements PlanPlugin {
         abstractionLayer = new NukkitPlatformLayer(this);
         logger = abstractionLayer.getPluginLogger();
         runnableFactory = abstractionLayer.getRunnableFactory();
+
+        getLogger().info( "Loading dependencies, this might take a while...");
+        try {
+            ApplicationBuilder.appending("Plan").downloadDirectoryPath(Paths.get(getDataFolder().getAbsolutePath()).resolve("libraries")).build();
+        } catch (IOException | ReflectiveOperationException | URISyntaxException | NoSuchAlgorithmException e) {
+            String version = abstractionLayer.getPluginInformation().getVersion();
+            Logger.getGlobal().log(Level.SEVERE, e, () -> this.getClass().getSimpleName() + "-v" + version);
+            getLogger().error("Plan failed to load its dependencies correctly!");
+            getLogger().error( "This error should be reported at https://github.com/plan-player-analytics/Plan/issues");
+            onDisable();
+        }
     }
 
     @Override

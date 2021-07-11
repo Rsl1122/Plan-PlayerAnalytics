@@ -35,7 +35,6 @@ public class OldDependencyCacheDeletionTask extends TaskSystem.Task {
 
     private final File oldDependencyCache;
     private final File dependencyCache;
-    private final File libraries;
 
     private final ErrorLogger errorLogger;
 
@@ -46,7 +45,6 @@ public class OldDependencyCacheDeletionTask extends TaskSystem.Task {
     ) {
         oldDependencyCache = files.getDataDirectory().resolve("dependency_cache").toFile();
         dependencyCache = files.getDataDirectory().resolve("dep_cache").toFile();
-        libraries = files.getDataDirectory().resolve("libraries").toFile();
         this.errorLogger = errorLogger;
     }
 
@@ -60,7 +58,6 @@ public class OldDependencyCacheDeletionTask extends TaskSystem.Task {
     public void run() {
         tryToDeleteDirectory(oldDependencyCache);
         tryToDeleteDirectory(dependencyCache);
-        tryToDeleteDirectory(libraries);
     }
 
     private void tryToDeleteDirectory(File directory) {
