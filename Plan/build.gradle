@@ -77,7 +77,7 @@ subprojects {
         redisBungeeVersion = "0.6.3"
 
         commonsTextVersion = "1.9"
-        commonsCompressVersion = "1.20"
+        commonsCompressVersion = "1.21"
         caffeineVersion = "2.9.2"
         mysqlVersion = "8.0.25"
         sqliteVersion = "3.36.0.1"
